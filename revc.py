@@ -19,3 +19,5 @@ def rev_comp(dna_strand):
         elif nuc == 'C':
             new_strand = 'G' + new_strand
     return new_strand
+
+
