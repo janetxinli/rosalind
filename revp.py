@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Given a DNA string, return the position (1-based) and length of every reverse palindrome in the string.
+Given a DNA string, print the position (1-based) and length of every reverse palindrome in the string to stdout.
+Usage: cat [input_string] | python3 revp.py
 """
 
 import sys
