@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jul  5 13:40:39 2019
-
-@author: janetli
+Return reverse complement of a dna strand
 """
 
 def rev_comp(dna_strand):
@@ -19,5 +17,8 @@ def rev_comp(dna_strand):
         elif nuc == 'C':
             new_strand = 'G' + new_strand
     return new_strand
+
+# print(rev_comp("ATATA"))
+# print(rev_comp("AAAAA"))
 
 
