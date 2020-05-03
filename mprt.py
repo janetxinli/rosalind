@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Takes a file containing a different uniprot ID on each line from stdin and prints the IDs containing
+N-glycosylation domains and their respective locations (1-based indexing) to stdout.
+"""
 
 import sys
 from urllib.request import urlopen
@@ -60,6 +64,5 @@ def find_domains(uniprot_id):
 # find_domains("B5ZC00")
 
 if __name__ == "__main__":
-    for id in sys.stdin:
-        find_domains(id.strip())
-
+    for prot_id in sys.stdin:
+        find_domains(prot_id.strip())
