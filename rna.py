@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Fri Jul  5 13:41:06 2019
-
-@author: janetli
+Given an input dna string, transcribe and return the corresponding rna string.
 """
 
 def rna(dna_string):
