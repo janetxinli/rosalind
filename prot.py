@@ -17,7 +17,9 @@ genetic_code = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L", "UCU":"S", "UCA":"S"
 
 def translate(rna_string):
     if not type(rna_string) is str:
-        raise TypeError("Only strings allowed")
+        raise TypeError("Only strings allowed.")
+    if len(rna_string) % 3 != 0:
+        raise InputError("Input RNA string must be divisible by 3.")
     peptide = ""
     codon_list = [rna_string[i:3+i].upper() for i in range (0, len(rna_string), 3)]
     for codon in codon_list:
