@@ -15,13 +15,13 @@ def generate_profile(infile):
     Given a fasta file of equal length sequences, return a profile matrix representing
     the number of occurrences of each base.
     """
+
     with open(infile, "r") as fh:
         seqs = []
         for _, seq in read_fasta(fh):
             seqs.append(seq)
 
     # Make a profile for nucleotide counts
-    # profile = [[0]*len(seqs[0]), [0]*len(seqs[0]), [0]*len(seqs[0]), [0]*len(seqs[0])]
     profile = []
     for _ in range(len(seqs[0])):
         profile.append([0] * 4)
@@ -73,6 +73,7 @@ def get_consensus(profile):
     Given a profile matrix of nucleotide frequencies, return the
     consensus sequence.
     """
+
     consensus_seq = ""
     for position in range(len(profile)):
         consensus_seq += get_max(profile[position])
@@ -84,6 +85,7 @@ def print_profile(profile):
     Print profile matrix so each line displays the counts for a single nucleotide
     in each position of profile.
     """
+
     for base in range(len(BASES)):
         counts = []
         for pos in range(len(profile)):
