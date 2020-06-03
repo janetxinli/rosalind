@@ -49,11 +49,12 @@ def permHelper(numlist, first, last):
     if last == first:
         print(" ".join(numlist), file=sys.stdout)
 
-# perm(3)
+
 
 if __name__ == "__main__":
     invalue = int(sys.stdin.readline().strip())
     perm(invalue)
+    # perm(3)
 
 
 
