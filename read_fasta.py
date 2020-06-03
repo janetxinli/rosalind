@@ -4,39 +4,31 @@ Scan a fasta file given in Rosalind format and return the header (position 0)
 and sequence (position 1)
 """
 
-def read_fasta(file_obj):
+def read_fasta(filename):
     """
     Takes in a list containing the contents of a file and returns the header and sequence
     of that file in a tuple.
     """
-    header = []
-    seq = []
 
-    current = file_obj.readline()
-    current_seq = None
+    with open(filename, "r") as fh:
+        header = []
+        seq = []
 
-    # Iterate over each line in file object
-    while current:
-        # current_seq = None
-        # Header line
-        if current[0] == ">":
-            if current_seq:
-                seq.append(current_seq)
-            current_seq = None
-            header.append(current[1:].strip())
+        current = fh.readline()
 
-        # First sequence line
-        elif not current_seq:
-            current_seq = current.strip()
+        # Iterate over each line in file object
+        while current:
+            if current[0] == ">":  # Header line
+                header.append(current[1:].strip())
+                seq.append("")
+            else:  # Sequence line
+                seq[-1] += current.strip()
 
-        else:
-            current_seq += current.strip()
+            current = fh.readline()
 
-        current = file_obj.readline()
-
-    # Append last sequence to seq list
-    seq.append(current_seq)
-
-    while len(header) > 0 and len(seq) > 0:
-        yield header.pop(0), seq.pop(0)
+        # Yield corresponding headers and sequences as tuple
+        i = 0
+        while i < len(header):
+            yield header[i], seq[i]
+            i += 1
 
