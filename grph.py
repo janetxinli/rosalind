@@ -51,7 +51,9 @@ def main(infile):
 
                     overlaps.add_edge(header_1, header_2)
 
-    plot(overlaps)
+    visual_style = {'vertex_label': overlaps.vs['name'], 'bbox': (1500, 1500)}
+
+    plot(overlaps, **visual_style)
 
 if __name__ == "__main__":
     main("rosalind_grph.txt")
