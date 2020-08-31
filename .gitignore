@@ -1,5 +1,6 @@
-*.txt
 __pycache__
+*.txt
 .vscode
-.idea/*
+.idea
 .ipynb_checkpoints/
+*.xml
