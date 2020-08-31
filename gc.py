@@ -8,7 +8,6 @@ Author: janetxinli
 import sys
 
 def get_gc(seq):
-    gc_count = 0
     gc_count = seq.count("C")
     gc_count += seq.count("G")
     return((gc_count/len(seq)) * 100)
