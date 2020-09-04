@@ -17,8 +17,8 @@ class Node:
                 outstr += edge.name
         return outstr
         
-    def add_neighbour(self, other):
-        self.edges.append(other)
+    def add_neighbour(self, other, weight):
+        self.edges.append([other, weight])
     
     def num_edges(self):
         return len(self.edges)
@@ -27,7 +27,7 @@ class Node:
         return len(self.edges) > 0
     
     def get_edge(self):
-        return self.edges[0]
+        return self.edges[0][0]
 
 class Graph:
     def __init__(self):
@@ -44,15 +44,15 @@ class Graph:
             n_edges = node.num_edges()
             for j, connected in enumerate(node.edges):
                 if j < (n_edges - 1):
-                    out_string += "%s, " % connected.name
+                    out_string += "%s, " % connected
                 else:
-                    out_string += "%s\n" % connected.name
+                    out_string += "%s\n" % connected
         return out_string
     
     def __iter__(self):
         return iter(self.adj_list.values())
     
-    def add_edge(self, source_name, target_name):
+    def add_edge(self, source_name, target_name, weight=None):
         if source_name not in self.adj_list:
             # print("adding %s" % source_name)
             source_node = Node(source_name)
@@ -63,6 +63,6 @@ class Graph:
             target_node = Node(target_name)
             self.adj_list[target_name] = target_node
             self.nodes += 1
-        self.adj_list[source_name].add_neighbour(self.adj_list[target_name])
+        self.adj_list[source_name].add_neighbour(self.adj_list[target_name], weight)
         self.adj_list[source_name].outdegree += 1
         self.adj_list[target_name].indegree += 1
