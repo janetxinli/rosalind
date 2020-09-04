@@ -22,24 +22,25 @@ def prefix(sequence, l):
 def create_graph(list_of_seq):
     """Creates an overlap graph based on a list of sequences."""
     super_string_graph = Graph()
-    length = len(list_of_seq[0])  # Longest sequence length
-    middle = length // 2
-    pos = length
     num_seq = len(list_of_seq)
-    while pos >= middle:
-        i = 0
-        while i < num_seq:
-            found = False
-            j = 0
-            while j < num_seq and not found:
-                first = list_of_seq[i]
+    i = 0
+    while i < num_seq:
+        first = list_of_seq[i]
+        j = 0
+        while j < num_seq:
+            if i != j:
                 second = list_of_seq[j]
-                if i != j and suffix(first, pos) == prefix(second, pos):
-                    super_string_graph.add_edge(first, second)
-                    found = True
-                j += 1
-            i += 1
-        pos -= 1
+                max_overlap = min(len(first), len(second))  # Maximum overlength is shortest sequence
+                min_overlap = max(len(first), len(second)) // 2 # Minimum overlap is half of the largest sequence
+                overlap = max_overlap
+                found = False
+                while overlap >= min_overlap and not found:
+                    if suffix(first, overlap) == prefix(second, overlap):
+                        super_string_graph.add_edge(first, second, weight=overlap)
+                        found = True
+                    overlap -= 1
+            j += 1
+        i += 1
     return super_string_graph
 
 def find_shortest_superstring(sequence_graph):
@@ -47,38 +48,36 @@ def find_shortest_superstring(sequence_graph):
     superstring = ""
     for v in sequence_graph:
         if v.indegree == 0:
-            # print("start is %s" % v.name)
             current = v
             superstring += current.name
-            seq_len = len(current.name)
-            middle = seq_len // 2
             next = current.get_edge()
-            while next.has_edges():
-                # print("%s has edges" % next.name)
-                pos = seq_len
+            while next:
+                current_seq = current.name
+                next_seq = next.name
+                max_overlap = min(len(current_seq), len(next_seq))
+                min_overlap = max(len(current_seq), len(next_seq)) // 2
+                overlap = max_overlap
                 found = False
-                while pos >= middle and not found:
-                    if suffix(current.name, pos) == prefix(next.name, pos):
-                        superstring += suffix(next.name, seq_len-pos)
+                while overlap >= min_overlap and not found:
+                    if suffix(current_seq, overlap) == prefix(next_seq, overlap):
+                        superstring += suffix(next_seq, len(next_seq) - overlap)
                         current = next
-                        # if next.has_edges():
-                        #     next = next.get_edge()
-                        # else:
-                        #     next = None
-                        next = next.get_edge()
+                        if next.has_edges():
+                            next = next.get_edge()
+                        else:
+                            next = None
                         found = True
-                    pos -= 1
-    superstring += suffix(next.name, seq_len-pos+1)
+                    overlap -= 1
     return superstring
 
-if __name__ == "__main__":
-    # sequence_graph = create_graph(['ATTAGACCTG', 'CCTGCCGGAA', 'AGACCTGCCG', 'GCCGGAATAC'])
-    # print(find_shortest_superstring(sequence_graph))
+def main():
     infile = sys.argv[1]
     seqs = []
     for _, seq in read_fasta(infile):
         seqs.append(seq)
-    print(find_shortest_superstring(create_graph(seqs)))
-    # graph = create_graph(seqs)
+    graph = create_graph(seqs)
+    print(find_shortest_superstring(graph))
 
-### Define max overlap and middle for every pair of reads
+
+if __name__ == "__main__":
+    main()
