@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Finding a motif in DNA
+Usage: ./subs.py [input file]
+"""
 
 import sys
 

@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Fri Jul  5 13:40:40 2019
 
-@author: janetli
 """
 
 def n_count(dna_string):

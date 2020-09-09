@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Consensus and profile.
-Usage: python3 ./cons.py [input_file]
+Usage: ./cons.py [input file]
 """
 
 import sys
@@ -45,7 +45,6 @@ def get_max(nuc_count):
     that occurs most frequently. If two or more nucleotides are present in equal
     amounts, choose randomly between those nucleotides.
     """
-
     # Find most frequent base
     most_frequent = max(nuc_count)
 
@@ -71,7 +70,6 @@ def get_consensus(profile):
     Given a profile matrix of nucleotide frequencies, return the
     consensus sequence.
     """
-
     consensus_seq = ""
     for position in range(len(profile)):
         consensus_seq += get_max(profile[position])
@@ -83,7 +81,6 @@ def print_profile(profile):
     Print profile matrix so each line displays the counts for a single nucleotide
     in each position of profile.
     """
-
     for base in range(len(BASES)):
         counts = []
         for pos in range(len(profile)):
