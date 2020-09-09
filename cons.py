@@ -6,7 +6,7 @@ Usage: python3 ./cons.py [input_file]
 
 import sys
 from random import choice
-from read_fasta import read_fasta
+from tools import read_fasta
 
 BASES = ["A", "C", "G", "T"]
 
@@ -15,11 +15,9 @@ def generate_profile(infile):
     Given a fasta file of equal length sequences, return a profile matrix representing
     the number of occurrences of each base.
     """
-
-    with open(infile, "r") as fh:
-        seqs = []
-        for _, seq in read_fasta(fh):
-            seqs.append(seq)
+    seqs = []
+    for _, seq in read_fasta(infile):
+        seqs.append(seq)
 
     # Make a profile for nucleotide counts
     profile = []
@@ -98,6 +96,7 @@ def main():
     print(get_consensus(profile_matrix))
     print_profile(profile_matrix)
 
-main()
+if __name__ == "__main__":
+    main()
 
 
