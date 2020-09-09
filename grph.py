@@ -8,20 +8,19 @@ import sys
 from tools import read_fasta
 
 def prefix(dna_string):
-    """Returns the 3 nucleotide long prefix of dna_string."""
+    """Return the 3 nucleotide long prefix of dna_string."""
     return dna_string[:3]
 
 def suffix(dna_string):
-    """Returns the 3 nucleotide long suffix of dna_string."""
+    """Return the 3 nucleotide long suffix of dna_string."""
     return dna_string[-3:]
 
 def main():
-    """Loads all sequences from the input fasta file."""
+    """Load all sequences from the input fasta file."""
     if len(sys.argv) != 2:
         print("Usage: %s [input file]" % sys.argv[0])
         sys.exit(1)
     sequences = {}
-    overlaps = Graph()
 
     for header, seq in read_fasta(sys.argv[1]):
         sequences[header] = seq
