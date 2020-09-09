@@ -1,1 +1,2 @@
 from .read_fasta import read_fasta
+from .graph import Graph
