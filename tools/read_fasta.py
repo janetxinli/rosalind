@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""
-Scan a fasta file given in Rosalind format and return the header (position 0)
-and sequence (position 1)
-"""
+"""Scan a fasta file given in Rosalind format to yield the header and sequence."""
 
 def read_fasta(filename):
     """
