@@ -6,4 +6,5 @@ __pycache__
 *.xml
 test_*.py
 rosalind_env/
-answers/
+answers
+
