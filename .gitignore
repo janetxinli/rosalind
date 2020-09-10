@@ -7,4 +7,4 @@ __pycache__
 test_*.py
 rosalind_env/
 answers
-
+ini*.py
