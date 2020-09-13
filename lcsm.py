@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-Takes a fasta file of contigs as input from stdin
-and returns the first longest common substring.
-Usage: python3 lcsm.py [input_file]
+Finding a shared motif
+Usage: ./lcsm.py [input_file]
 """
 
 import sys

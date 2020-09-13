@@ -2,8 +2,8 @@
 # Usage: python3 long.py <infile>
 
 import sys
-from graph import Graph
-from read_fasta import read_fasta
+from tools import Graph
+from tools import read_fasta
 
 def suffix(sequence, l):
     """Returns the suffix of length l of a string sequence."""

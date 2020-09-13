@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-Given k=homozygous dominant, m=heterozygous, n=homozygous recessive, calculate the possibility that two randomly selected
-individuals will produce an offspring possessing a dominant allele.
-
-Usage: cat [rosalind.txt] | python3 iprb.py
+Mendel's first law
+Usage: ./iprb.py [input data]
 """
 
 import sys
 
 def calculate_dom(k, m, n):
+    """
+    Calculate the probability of two random organisms producing an
+    individual possessing a dominant allele.
+    """
     total = k + m + n
     second_total = k + m + n - 1
 
@@ -28,18 +30,19 @@ def calculate_dom(k, m, n):
     n_k = (n/total) * (k/second_total)
     n_m = 0.5 * (n/total) * (m/second_total)
     n_prob = n_k + n_m
+    
     return k_prob + m_prob + n_prob
 
-def run():
-    if __name__ == "__main__":
-        for line in sys.stdin:
-            n1, n2, n3 = line.split(" ")
-            n1 = int(n1)
-            n2 = int(n2)
-            n3 = int(n3)
-            print(calculate_dom(n1, n2, n3))
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: %s [input file]" % sys.argv[0])
+        sys.exit(1)
+    with open(sys.argv[1]) as infile:
+        n1, n2, n3 = infile.readline().strip().split(" ")
+        print(calculate_dom(int(n1), int(n2), int(n3)))
 
-run()
+if __name__ == "__main__":
+    main()
 
 
 

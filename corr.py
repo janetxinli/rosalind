@@ -40,6 +40,7 @@ def find_erroneous_reads(reads):
             elif hamming_distance(wrong_read, correct_rev) == 1:
                 read_pairs.append([wrong_read, correct_rev])
                 break
+    
     return read_pairs
 
 def main():
