@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
+"""
+Finding a spliced motif
+Usage: ./sseq.py [input file]
+"""
 
-import argparse
-from read_fasta import read_fasta
+import sys
+from tools import check_input, read_fasta
 
 def find_subsequence(sequence, search):
     """Return a collection of indices in sequence in which the characters of search appear
@@ -20,26 +24,18 @@ def find_subsequence(sequence, search):
         i += 1
     return " ".join(indices)
 
-
-def get_args():
-    parser = argparse.ArgumentParser(description="Find the indices of a spliced motif")
-    parser.add_argument("input",
-                        type=str,
-                        help="Input file")
-    return parser.parse_args()
-
 def main():
-    args = get_args()
+    """Find indices of a given subsequence in a given sequence."""
+    check_input(sys.argv[0])
     i = 0
-    for _, seq in read_fasta(args.input):
+    for _, seq in read_fasta(sys.argv[1]):
         if i == 0:
             sequence = seq
         elif i == 1:
             search = seq
         i += 1
-    
-    print(find_subsequence(sequence, search))
 
+    print(find_subsequence(sequence, search))
 
 if __name__ == "__main__":
     main()

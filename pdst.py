@@ -25,6 +25,7 @@ def create_matrix(list_of_sequences):
     return matrix
 
 def main():
+    """Print distance matrix for input sequences."""
     check_input(sys.argv[0])
     sequences = []
     for _, seq in read_fasta(sys.argv[1]):

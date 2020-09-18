@@ -5,6 +5,7 @@ Usage: ./iprb.py [input data]
 """
 
 import sys
+from tools import check_input
 
 def calculate_dom(k, m, n):
     """
@@ -34,9 +35,8 @@ def calculate_dom(k, m, n):
     return k_prob + m_prob + n_prob
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    """Calculate probability for input."""
+    check_input(sys.argv[0])
     with open(sys.argv[1]) as infile:
         n1, n2, n3 = infile.readline().strip().split(" ")
         print(calculate_dom(int(n1), int(n2), int(n3)))

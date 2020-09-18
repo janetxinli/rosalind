@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
+"""
+Longest increasing subsequence
+Usage: ./lgis.py [input file]
+"""
 
 import sys
+from tools import check_input
 
 def longest_subsequence(sequence):
-    """Returns the longest increasing and longest decreasing subsequences in sequence."""
-
+    """Return the longest increasing and longest decreasing subsequences in sequence."""
     longest_increasing = []
     longest_decreasing = []
-
     for num in sequence:
         longest_increasing.append([num])
         longest_decreasing.append([num])
-
     i = 1
     while i < len(sequence):
         j = i - 1
@@ -28,13 +30,14 @@ def longest_subsequence(sequence):
     increasing = [str(i) for i in max(longest_increasing, key=lambda x: len(x))]
     decreasing = [str(i) for i in max(longest_decreasing, key=lambda x: len(x))]
 
-    return "{i}\n{d}".format(i=" ".join(increasing), d=" ".join(decreasing))
+    return "%s\n%s" % (" ".join(increasing), " ".join(decreasing))
+
+def main():
+    """Read input file and print longest increasing and decreasing subsequences."""
+    check_input(sys.argv[0])   
+    with open(sys.argv[1]) as infile:
+        in_seq = infile.readlines()[1].strip().split()
+        print(longest_subsequence([int(i) for i in in_seq]))
 
 if __name__ == "__main__":
-    input = sys.stdin.readlines()
-    in_seq = input[1].strip().split()
-
-    for i, item in enumerate(in_seq):
-        in_seq[i] = int(item)
-
-    print(longest_subsequence(in_seq))
+    main()

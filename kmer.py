@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
+"""
+k-Mer composition
+Usage: ./kmer.py [input file]
+"""
 
 import sys
-from tools import read_fasta
+from tools import read_fasta, check_input
 
 def quaternary_to_decimal(quaternary):
     """Convert a string representing a quaternary number to a decimal number."""
@@ -31,9 +35,8 @@ def count_composition(sequence):
     print(" ".join([str(x) for x in composition]))
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    """Print 4-mer composition array."""
+    check_input(sys.argv[0])
     for _, seq in read_fasta(sys.argv[1]):
         count_composition(seq)
 

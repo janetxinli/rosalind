@@ -5,7 +5,7 @@ Usage: ./corr.py [input file]
 """
 
 import sys
-from tools import read_fasta
+from tools import read_fasta, check_input
 from hamm import hamming_distance
 from revc import rev_comp
 
@@ -44,9 +44,8 @@ def find_erroneous_reads(reads):
     return read_pairs
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    """Print erroneous and correct reads."""
+    check_input(sys.argv[0])
     reads = []
     for _, seq in read_fasta(sys.argv[1]):
         reads.append(seq)

@@ -14,6 +14,7 @@ def count_ancestors(leaves):
     return leaves - 2
 
 def main():
+    """Count number of internal nodes for input."""
     check_input(sys.argv[0])
     with open(sys.argv[1]) as infile:
         print(count_ancestors(int(infile.readline().strip())))

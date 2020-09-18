@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Return reverse complement of a dna strand
+Complementing a strand of DNA
+Usage: ./revc.py [input file]
 """
+
+import sys
+from tools import check_input
 
 def rev_comp(dna_strand):
-
+    """Return the reverse complement of a strand of DNA."""
     new_strand = ''
     for nuc in dna_strand:
         if nuc == 'A':
@@ -18,7 +21,12 @@ def rev_comp(dna_strand):
             new_strand = 'G' + new_strand
     return new_strand
 
-# print(rev_comp("ATATA"))
-# print(rev_comp("AAAAA"))
+def main():
+    """Reverse complement input DNA sequence."""
+    check_input(sys.argv[0])
+    with open(sys.argv[1]) as infile:
+        sequence = infile.readline().strip()
+    print(rev_comp(sequence))
 
-
+if __name__ == "__main__":
+    main()

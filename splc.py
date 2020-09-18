@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Given a pre-mRNA sequence and intron sequences contained within that pre-mRNA, return
-the resulting translated protein string from the (spliced) mRNA.
+RNA splicing
+Usage: ./splc.py [input file]
 """
 
 import sys
-from read_fasta import read_fasta
+from tools import read_fasta, check_input
 from rna import rna
 from prot import translate
 
@@ -14,28 +14,22 @@ def splice(seq_list):
     Given a list of sequences where 0 is the pre-mRNA and the remaining are introns,
     return a sequence string with the introns spliced out.
     """
-
     mrna = seq_list.pop(0)
-
     for intron in seq_list:
         mrna = mrna.replace(intron, "")
 
     return mrna
 
 def main():
-    # Load sequences into a list
-    with open(sys.argv[1], "r") as fh:
-        seqs = []
-        for _, seq in read_fasta(fh):
-            transcribed = rna(seq)
-            seqs.append(transcribed)
+    """Splice and translate input DNA string."""
+    check_input(sys.argv[0])
+    seqs = []
+    for _, seq in read_fasta(sys.argv[1]):
+        transcribed = rna(seq)
+        seqs.append(transcribed)
 
-    # Splice pre-mRNA
     mrna = splice(seqs)
-
-    # Translate mRNA
-    print(translate(mrna), file=sys.stdout)
-
+    print(translate(mrna))
 
 if __name__ == "__main__":
     main()

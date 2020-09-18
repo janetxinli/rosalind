@@ -5,6 +5,7 @@ Usage: ./fibd.py [input file]
 """
 
 import sys
+from tools import check_input
 
 def mortal_fib_rabbits(n, m):
     """
@@ -34,9 +35,7 @@ def mortal_fib_rabbits(n, m):
 
 def main():
     """Count mortal rabbits."""
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    check_input(sys.argv[0])
     with open(sys.argv[1]) as infile:
         inputs = infile.readline().strip().split(" ")
         print(mortal_fib_rabbits(int(inputs[0]), int(inputs[1])))

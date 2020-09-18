@@ -5,7 +5,7 @@ Usage: ./grph.py [input file]
 """
 
 import sys
-from tools import read_fasta
+from tools import read_fasta, check_input
 
 def prefix(dna_string):
     """Return the 3 nucleotide long prefix of dna_string."""
@@ -16,15 +16,12 @@ def suffix(dna_string):
     return dna_string[-3:]
 
 def main():
-    """Load all sequences from the input fasta file."""
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    """Load all sequences from the input fasta file and print graph."""
+    check_input(sys.argv[0])
     sequences = {}
 
     for header, seq in read_fasta(sys.argv[1]):
         sequences[header] = seq
-
     for header_1 in sequences:
         for header_2 in sequences:
             if sequences[header_1] != sequences[header_2]:  # Only compare different seqs

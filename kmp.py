@@ -5,14 +5,13 @@ Usage: ./kmp.py [input file]
 """
 
 import sys
-from tools import read_fasta
+from tools import read_fasta, check_input
 from long import prefix
 
 def create_failure_array(sequence):
     """Produce the failure array for a given sequence."""
     seq_length = len(sequence)
     failure = [0] * seq_length
-
     i = 1
     while i < seq_length:
         prev_score = failure[i-1]
@@ -34,9 +33,7 @@ def create_failure_array(sequence):
 
 def main():
     """Read file and print the failure array."""
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    check_input(sys.argv[0])
     for _, seq in read_fasta(sys.argv[1]):
         print(" ".join([str(x) for x in create_failure_array(seq)]))
     

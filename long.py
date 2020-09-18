@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-# Usage: python3 long.py <infile>
+"""
+Genome assembly as shortest superstring
+Usage: ./long.py [input file]
+"""
 
 import sys
 from tools import Graph
-from tools import read_fasta
+from tools import read_fasta, check_input
 
 def suffix(sequence, l):
     """Returns the suffix of length l of a string sequence."""
@@ -71,13 +74,12 @@ def find_shortest_superstring(sequence_graph):
     return superstring
 
 def main():
-    infile = sys.argv[1]
+    check_input(sys.argv[0])
     seqs = []
-    for _, seq in read_fasta(infile):
+    for _, seq in read_fasta(sys.argv[1]):
         seqs.append(seq)
     graph = create_graph(seqs)
     print(find_shortest_superstring(graph))
-
 
 if __name__ == "__main__":
     main()

@@ -5,6 +5,7 @@ Usage: ./subs.py [input file]
 """
 
 import sys
+from tools import check_input
 
 def substring_location(string, sub):
     """Given a string and a substring, return all locations of the substring within 
@@ -17,13 +18,10 @@ def substring_location(string, sub):
 
 def main():
     """Find substrings."""
-    if len(sys.argv) != 2:
-        print("Usage: python3 subs.py [rosalind file]", file=sys.stdout)
-        sys.exit(1)
-    infile = sys.argv[1]
-    with open(infile, "r") as infile:
+    check_input(sys.argv[0])
+    with open(sys.argv[1]) as infile:
         lines = infile.readlines()
-        print(substring_location(lines[0].strip(), lines[1].strip()), file=sys.stdout)
+        print(substring_location(lines[0].strip(), lines[1].strip()))
 
 if __name__ == "__main__":
     main()

@@ -5,6 +5,7 @@ Usage: ./hamm.py [input file]
 """
 
 import sys
+from tools import check_input
 
 def hamming_distance(s, t):
     """Calculate hamming distance between strings of equal length s and t."""
@@ -18,9 +19,7 @@ def hamming_distance(s, t):
 
 def main():
     """Calculate hamming distance for input file."""
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    check_input(sys.argv[0])
     with open(sys.argv[1]) as infile:
         string_1 = infile.readline().strip()
         string_2 = infile.readline().strip()

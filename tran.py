@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+"""Transitions and transversions
+Usage: ./tran.py [input file]
+"""
 
-import argparse
-from read_fasta import read_fasta
+import sys
+from tools import check_input, read_fasta
 
 class Base:
     """A base (nucleotide) class."""
@@ -16,7 +19,6 @@ class Base:
         elif self.nucleotide == "C" or self.nucleotide == "T":
             return "pyrimidine"
 
-
 class Mutation():
     """A mutation class that compares bases."""
     def __init__(self, old, new):
@@ -28,16 +30,6 @@ class Mutation():
             return "transition"
         else:
             return "transversion"
-
-
-def get_args():
-    """Parse the command line arguments."""
-    parser = argparse.ArgumentParser(description="Transitions and transversions")
-    parser.add_argument("input",
-                        type=str,
-                        help="Rosalind input file name")
-    return parser.parse_args()
-
 
 def count_mutations(seq_1, seq_2):
     """Count the number of transitions and transversions between two sequences of equal length."""
@@ -54,12 +46,12 @@ def count_mutations(seq_1, seq_2):
         i += 1
     
     return transitions, transversions
-    
 
 def main():
-    args = get_args()
+    """Count transitions and transversions between two given DNA strings."""
+    check_input(sys.argv[0])
     i = 0
-    for _, seq in read_fasta(args.input):
+    for _, seq in read_fasta(sys.argv[1]):
         if i == 0:
             seq_1 = seq
         elif i == 1:

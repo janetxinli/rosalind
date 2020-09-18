@@ -5,7 +5,7 @@ Usage: ./gc.py [input file]
 """
 
 import sys
-from tools import read_fasta
+from tools import read_fasta, check_input
 
 def get_gc(seq):
     """Get the GC content for a given sequence."""
@@ -16,9 +16,8 @@ def get_gc(seq):
     return (gc_count/len(seq)) * 100
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    """Print GC content for input sequence."""
+    check_input(sys.argv[0])
     gc_content = {}
     for header, seq in read_fasta(sys.argv[1]):
         gc_content[get_gc(seq)] = header

@@ -6,27 +6,20 @@ Usage: ./cons.py [input file]
 
 import sys
 from random import choice
-from tools import read_fasta
+from tools import read_fasta, check_input
 
 BASES = ["A", "C", "G", "T"]
 
-def generate_profile(infile):
+def generate_profile(seqs):
     """
     Given a fasta file of equal length sequences, return a profile matrix representing
     the number of occurrences of each base.
     """
-    seqs = []
-    for _, seq in read_fasta(infile):
-        seqs.append(seq)
-
-    # Make a profile for nucleotide counts
     profile = []
     for _ in range(len(seqs[0])):
         profile.append([0] * 4)
 
-    # Iterate over every sequence
     for sequence in seqs:
-        # Iterate over every character in sequence
         for i in range(len(sequence)):
             if sequence[i] == "A":
                 profile[i][0] += 1
@@ -45,21 +38,14 @@ def get_max(nuc_count):
     that occurs most frequently. If two or more nucleotides are present in equal
     amounts, choose randomly between those nucleotides.
     """
-    # Find most frequent base
     most_frequent = max(nuc_count)
-
-    # More than one base is most frequent
     if nuc_count.count(most_frequent) > 1:
         frequent_bases = []
         for i, base in enumerate(nuc_count):
             if base == most_frequent:
                 frequent_bases.append(BASES[i])
-
-        # Randomly choose from most frequent bases
         consensus_base = choice(frequent_bases)
-
     else:
-        # Consensus base is most frequent base
         consensus_base = BASES[nuc_count.index(most_frequent)]
 
     return consensus_base
@@ -88,10 +74,15 @@ def print_profile(profile):
         print("{base}: {counts}".format(base=BASES[base], counts=" ".join(counts)))
 
 def main():
-    input = sys.argv[1]
-    profile_matrix = generate_profile(input)
-    print(get_consensus(profile_matrix))
-    print_profile(profile_matrix)
+    """Print consensus sequence and profile matrix for a given set of sequences."""
+    check_input(sys.argv[0])
+    infile = sys.argv[1]
+    seqs = []
+    for _, seq in read_fasta(infile):
+        seqs.append(seq)
+    profile = generate_profile(seqs)
+    print(get_consensus(profile))
+    print_profile(profile)
 
 if __name__ == "__main__":
     main()

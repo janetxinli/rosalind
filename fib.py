@@ -5,6 +5,7 @@ Usage: ./fib.py [input file]
 """
 
 import sys
+from tools import check_input
 
 def fib_rabbits(months, litter):
     """
@@ -24,9 +25,7 @@ def fib_rabbits(months, litter):
 
 def main():
     """Count rabbits."""
-    if len(sys.argv) != 2:
-        print("Usage: %s [input file]" % sys.argv[0])
-        sys.exit(1)
+    check_input(sys.argv[0])
     with open(sys.argv[1]) as infile:
         inputs = infile.readline().strip().split(" ")
         print(fib_rabbits(int(inputs[0]), int(inputs[1])))
