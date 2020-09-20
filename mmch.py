@@ -6,10 +6,10 @@ from tools import check_input, read_fasta
 
 def perm(n, r):
     """
-    Calculates the number of combinations nCr, where r items are chosen
+    Calculates the number of permutations where r items are chosen
     from a set of size n.
     """
-    return factorial(n) // (factorial(n-r))
+    return factorial(n) // factorial(n-r)
 
 def maximum_matchings(sequence):
     """
